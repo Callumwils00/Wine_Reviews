@@ -19,7 +19,9 @@ server <- function(input, output) {
     # The input caption captured by shiny ui is not automatically converted to a vector.
     # it therefore must be made into a list by using the strsplit function. This will return a list
     # which is flattened using unlist()
-    wine_words_2 <- unlist(str_extract_all(toupper(Text_input), paste0(toupper(wine_words), collapse = "|")))
+    wine_words_2 <- unlist(str_extract_all(toupper(Text_input), paste0("(?<!NO )(?i)(", 
+                                                                       paste0(toupper(wine_words),  collapse = "|"),
+                                                                       ")")))
     wine_words_2 <- unlist(strsplit(wine_words_2, " "))
     
     similarity_finder <- function(description, similarity_count, reg_ex){
